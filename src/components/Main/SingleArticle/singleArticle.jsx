@@ -2,6 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './singelArticle.css'
+import Loading from "../../UI/Loading";
+import Error from "../../UI/error";
+import ArticleComments from "./articlesComments";
+
 function SingleArticle() {
     const { article_id } = useParams();
     const [article, setArticle] = useState(null);
@@ -13,8 +17,8 @@ function SingleArticle() {
             .catch((err) => setError(err));
     }, [article_id]);
 
-    if (error) return <p>Error loading article: {error.message}</p>;
-    if (!article) return <p>Loading...</p>;
+    if (error) return <Error error={error} />;
+    if (!article) return <Loading />;
 
     const createdat = article.created_at ? article.created_at.split("-") : [];
 
@@ -31,6 +35,9 @@ function SingleArticle() {
                     <p>Votes: {article.votes}</p>
                     <button type="button">Vote</button>
                 </div>
+            </div>
+            <div className="article-comments">
+                <ArticleComments article_id={article.article_id} />
             </div>
         </div>
     );
