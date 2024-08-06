@@ -19,8 +19,9 @@
 }
 
 .nav-button:hover {
-    background-color: #555;
+    background-color: #e90000;
     color: #fff;
+    border-radius: 50%;
 }
 
 .nav-button:active {
