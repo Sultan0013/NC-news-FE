@@ -52,3 +52,56 @@
 .vote-box button:hover {
     background-color: #0056b3;
 }
+
+.article-comments {
+    margin-top: 32px;
+}
+
+.comment {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-votes {
+    margin-left: 16px;
+    text-align: center;
+}
+
+.comment-votes p {
+    margin: 0;
+}
+
+.comment-votes button {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-votes button:hover {
+    background-color: #0056b3;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+}

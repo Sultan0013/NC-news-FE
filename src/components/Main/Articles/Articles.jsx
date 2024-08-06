@@ -3,16 +3,20 @@ import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import ArticleCard from './ArticleCard';
 import './Article.css';
+import Loading from '../../UI/Loading';
+import Error from '../../UI/error';
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
+  const [error , setError] = useState(null)
 
   useEffect(() => {
     axios.get("https://nc-news-vvdv.onrender.com/api/articles")
       .then(response => setArticles(response.data.articles))
-      .catch(error => console.error('Error fetching articles:', error));
+      .catch(error => setError(error));
   }, []);
- if (articles.length === 0) return <p>Loading...</p>;
+  if(error) return <Error error={error}/>
+ if (articles.length === 0) return <Loading/>;
   return (
     <div className="articles-container">
       <h1>Articles</h1>
