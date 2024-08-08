@@ -2,10 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../../UI/Loading";
 import Error from "../../UI/error";
-import './singelArticle.css'; // Import additional CSS if needed
+import './singelArticle.css'; 
 
-function ArticleComments({ article_id }) {
-    const [comments, setComments] = useState([]);
+function ArticleComments({ article_id  , comments , setComments}) {
+   
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -22,9 +22,11 @@ function ArticleComments({ article_id }) {
         <div className="article-comments">
             {comments.map((comment) => (
                 <div key={comment.comment_id} className="comment">
+                  
                     <div className="comment-content">
                         <p className="comment-author">{comment.author}</p>
                         <p className="comment-body">{comment.body}</p>
+                        <button className="btn">Delete</button>
                     </div>
                     <div className="comment-votes">
                         <p>Votes: {comment.votes}</p>
