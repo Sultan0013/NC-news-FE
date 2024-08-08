@@ -6,6 +6,7 @@ import Loading from "../../UI/Loading";
 import Error from "../../UI/error";
 import ArticleComments from "./articlesComments";
 import handleVote from "./handleVote.jsx";
+import PostComment from "./addNewComment.jsx";
 
 function SingleArticle() {
     const { article_id } = useParams();
@@ -15,6 +16,7 @@ function SingleArticle() {
     const [voteError, setVoteError] = useState(null);
     const [hasAgreed, setHasAgreed] = useState(false);
     const [hasDisagreed, setHasDisagreed] = useState(false);
+     const [comments, setComments] = useState([]);
 
     useEffect(() => {
         axios.get(`https://nc-news-vvdv.onrender.com/api/articles/${article_id}`)
@@ -26,7 +28,7 @@ function SingleArticle() {
     }, [article_id]);
 
     if (error) return <Error error={error} />;
-    if (voteError) return <Error error={voteError} />;
+ 
     if (!article) return <Loading />;
 
     const createdAt = article.created_at ? article.created_at.split("-") : [];
@@ -48,8 +50,10 @@ function SingleArticle() {
                 </div>
                 {voteError && <p className="error-message">{voteError}</p>}
             </div>
+              
+              <PostComment article_id={article.article_id} comments={comments} setComments={setComments}></PostComment>      
             <div className="article-comments">
-                <ArticleComments article_id={article.article_id} />
+                <ArticleComments article_id={article.article_id} comments={comments} setComments={setComments} />
             </div>
         </div>
     );
