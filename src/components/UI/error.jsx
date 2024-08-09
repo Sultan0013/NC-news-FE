@@ -1,22 +1,20 @@
-
-
-function Error({error}) {
-    return <div role="alert" className="alert alert-error">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6 shrink-0 stroke-current"
-    fill="none"
-    viewBox="0 0 24 24">
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-  </svg>
-      <span>Error : {error.message}</span>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSDlAOphXW9TY680GBEgbeZJ7R6iFSXk-K8w&s"></img>
-</div>
+function Error({ error }) {
+  return (
+    <div
+      role="alert"
+      className="alert alert-error shadow-lg rounded-lg flex flex-col items-center space-y-4 p-6 bg-red-100 text-red-800"
+    >
+      <div className="text-center">
+        <span className="text-xl font-semibold">Error:</span>
+        <p className="mt-2 text-lg">{error.message}</p>
+      </div>
+      <img
+        src="https://static-00.iconduck.com/assets.00/error-icon-512x512-mmajyv8q.png"
+        alt="Error illustration"
+        className="w-40 h-40 rounded-full object-cover"
+      />
+    </div>
+  );
 }
-
 
 export default Error;

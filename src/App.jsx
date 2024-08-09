@@ -8,6 +8,7 @@ import Topics from './components/Main/Articles/Topics';
 import Users from './components/Main/Users/Users';
 import ListArticlesByTopic from './components/Main/Articles/ArticlesListedByTopic';
 import Footer from './components/Header/footer';
+import NotFound from './components/UI/NotFound';
 function App() {
   return (
     <Router>
@@ -22,7 +23,8 @@ function App() {
             <Route path="/articles/topics/:topic" element={<ListArticlesByTopic />} />
             <Route path="/articles/:article_id" element={<SingleArticle />} />
             <Route path="/topics" element={<Topics />} />
-            <Route path="/users" element={<Users />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
      <Footer/>
