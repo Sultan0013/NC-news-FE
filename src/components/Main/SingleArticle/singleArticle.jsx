@@ -16,7 +16,8 @@ function SingleArticle() {
     const [voteError, setVoteError] = useState(null);
     const [hasAgreed, setHasAgreed] = useState(false);
     const [hasDisagreed, setHasDisagreed] = useState(false);
-     const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [username, setusername] = useState('grumpy19')
 
     useEffect(() => {
         axios.get(`https://nc-news-vvdv.onrender.com/api/articles/${article_id}`)
@@ -53,7 +54,7 @@ function SingleArticle() {
               
               <PostComment article_id={article.article_id} comments={comments} setComments={setComments}></PostComment>      
             <div className="article-comments">
-                <ArticleComments article_id={article.article_id} comments={comments} setComments={setComments} />
+                <ArticleComments article_id={article.article_id} comments={comments} setComments={setComments} username={username} />
             </div>
         </div>
     );
