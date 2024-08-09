@@ -9,15 +9,12 @@ import handleVote from "./handleVote.jsx";
 import PostComment from "./addNewComment.jsx";
 
 function SingleArticle() {
-    const { article_id } = useParams();
+   const { article_id } = useParams();
     const [article, setArticle] = useState(null);
     const [error, setError] = useState(null);
     const [votes, setVotes] = useState(0);
-    const [voteError, setVoteError] = useState(null);
-    const [hasAgreed, setHasAgreed] = useState(false);
-    const [hasDisagreed, setHasDisagreed] = useState(false);
     const [comments, setComments] = useState([]);
-    const [username, setusername] = useState('grumpy19')
+    const [username, setUsername] = useState('grumpy19');
 
     useEffect(() => {
         axios.get(`https://nc-news-vvdv.onrender.com/api/articles/${article_id}`)
@@ -29,31 +26,31 @@ function SingleArticle() {
     }, [article_id]);
 
     if (error) return <Error error={error} />;
- 
     if (!article) return <Loading />;
 
-    const createdAt = article.created_at ? article.created_at.split("-") : [];
+    const convertToLocalTime = (created_at) => {
+        const date = new Date(created_at);
+        return date.toLocaleString().split(',')[0];
+    };
 
     return (
-        <div className="article--card">
+        <div className="card w-full bg-base-100 shadow-xl p-6">
             <div className="article-body">
-                <h2>{article.title}</h2>
-                {article.article_img_url && <img src={article.article_img_url} alt={article.title} />}
-                <p>{article.body}</p>
-                <p>Author: {article.author}</p>
-                <p>Topic: {article.topic}</p>
-                <p>Created at: {createdAt.length === 3 ? `${createdAt[1]}/${createdAt[0]}` : 'Unknown date'}</p>
-                <p>Comments : { article.comment_count}</p>
-                <div className="vote-box">
-                    <p>Votes: {votes}</p>
-                    <button onClick={() => handleVote(1, article.article_id, setVotes, votes, setVoteError, setHasAgreed, setHasDisagreed)} className="btn" disabled={hasAgreed}>Agree</button>
-                    <button onClick={() => handleVote(-1, article.article_id, setVotes, votes, setVoteError, setHasAgreed, setHasDisagreed)} className="btn" disabled={hasDisagreed}>Disagree</button>
-                </div>
-                {voteError && <p className="error-message">{voteError}</p>}
+                <h2 className="text-3xl font-bold mb-4 text-primary">{article.title}</h2>
+                {article.article_img_url && (
+                    <img src={article.article_img_url} alt={article.title} className="w-full rounded-lg mb-4" />
+                )}
+                <p className="text-lg mb-2">{article.body}</p>
+                <p className="text-sm text-black mb-2">Author: {article.author}</p>
+                <p className="text-sm text-black mb-2">Topic: {article.topic}</p>
+                <p className="text-sm text-black mb-2">Created at: {convertToLocalTime(article.created_at)}</p>
+                <p className="text-sm text-black mb-4">Comments: {article.comment_count}</p>
+                <div className="badge badge-outline">Votes: {votes}</div>
             </div>
               
-              <PostComment article_id={article.article_id} comments={comments} setComments={setComments}></PostComment>      
-            <div className="article-comments">
+            <PostComment article_id={article.article_id} comments={comments} setComments={setComments} />
+            
+            <div className="article-comments mt-8">
                 <ArticleComments article_id={article.article_id} comments={comments} setComments={setComments} username={username} />
             </div>
         </div>
