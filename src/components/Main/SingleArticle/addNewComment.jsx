@@ -41,10 +41,7 @@ function PostComment({ article_id , comments ,setComments}) {
     };
 
     return (
-        <div className="post-comment">
-            
-
-         
+        <div className="post-comment">     
 <button className="btn" onClick={()=>document.getElementById('my_modal_4').showModal()}>Add a new comment</button>
 <dialog id="my_modal_4" className="modal">
   <div className="modal-box w-11/12 max-w-5xl">
@@ -66,7 +63,7 @@ function PostComment({ article_id , comments ,setComments}) {
               
                 <button type="submit" className='btn' disabled={isSubmitting}>Post Comment</button>
             </form>
-            {error && <p className="error-message">"Failed to add comment : "{error}</p>}
+            {error && <p className="error-message">"Failed to add comment : "{error.message}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
     <div className="modal-action">
       <form method="dialog">
