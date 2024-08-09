@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-function Topics() {
+function Topics({setError}) {
     const [topics, setTopics] = useState([])
 
 
@@ -12,7 +12,11 @@ function Topics() {
             console.log(data.topics);
         setTopics(data.topics)
         }).catch((err) => {
-        console.log(err);
+        {    if (err.response && err.response.status === 404) {
+                    setError({ status: 404, message: "Articles not found" });
+                } else {
+                    setError({ status: 500, msg: "An unexpected error occurred" });
+                }}
         })},[])
 
     

@@ -22,7 +22,11 @@ function SingleArticle() {
                 setArticle(data.article[0]);
                 setVotes(data.article[0].votes);
             })
-            .catch((err) => setError(err));
+            .catch((err) => {    if (err.response && err.response.status === 404) {
+                    setError({ status: 404, message: "Article not found" });
+                } else {
+                    setError({ status: 500, msg: "An unexpected error occurred" });
+                }});
     }, [article_id]);
 
     if (error) return <Error error={error} />;

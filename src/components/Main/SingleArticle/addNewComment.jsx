@@ -12,7 +12,7 @@ function PostComment({ article_id , comments ,setComments}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (comment.trim() === '') {
-            setError('Comment cannot be empty');
+            setError({status : 400, message: "Comment cannot be empty"});
             return;
         }
 
@@ -22,6 +22,7 @@ function PostComment({ article_id , comments ,setComments}) {
       "username": username,
       "body": comment
     };
+  
   
         axios.post(`https://nc-news-vvdv.onrender.com/api/articles/${article_id}/comments`, newComment)
             .then(({ data }) => {
@@ -33,15 +34,20 @@ function PostComment({ article_id , comments ,setComments}) {
         
                 setTimeout(() => setSuccessMessage(''), 3000); 
             })
-            .catch((err) => {
-                setError(err);
-               
-                setIsSubmitting(false);
-            });
+            .catch((err) => 
+        {    if (err.response && err.response.status === 404) {
+                    setError({ status: 404, message: "Comment not found" });
+                } else {
+                    setError({ status: 500, msg: "An unexpected error occurred" });
+                }
+        });
     };
 
     return (
-        <div className="post-comment">     
+        <div className="post-comment">
+            
+
+         
 <button className="btn" onClick={()=>document.getElementById('my_modal_4').showModal()}>Add a new comment</button>
 <dialog id="my_modal_4" className="modal">
   <div className="modal-box w-11/12 max-w-5xl">

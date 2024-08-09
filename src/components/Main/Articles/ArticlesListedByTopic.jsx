@@ -28,7 +28,11 @@ function ListArticlesByTopic() {
       },
     })
       .then(response => setArticles(response.data.articles))
-      .catch(error => setError(error));
+      .catch(err => {    if (err.response && err.response.status === 404) {
+                    setError({ status: 404, message: "Articles not found" });
+                } else {
+                    setError({ status: 500, msg: "An unexpected error occurred" });
+                }});
   }, [topic, searchParams]);
 
   if (error) return <Error error={error} />;
@@ -50,7 +54,7 @@ function ListArticlesByTopic() {
     <div className="articles-container">
       <h1>{topic.charAt(0).toUpperCase() + topic.slice(1)} Articles</h1>
       <div className="topics-list">
-        <Topics />
+        <Topics setError={setError} />
       </div>
 
       <div className="sort-controls flex items-center space-x-4 p-4 bg-base-200 rounded-lg shadow">

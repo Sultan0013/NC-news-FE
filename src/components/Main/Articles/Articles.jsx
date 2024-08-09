@@ -29,7 +29,11 @@ const Articles = () => {
         console.log(sort_by, order);
         setArticles(response.data.articles)
       })
-      .catch(error => setError(error));
+      .catch(err => {    if (err.response && err.response.status === 404) {
+                    setError({ status: 404, message: "Articles not found" });
+                } else {
+                    setError({ status: 500, msg: "An unexpected error occurred" });
+                }});
   }, [searchParams]);
 
   if (error) return <Error error={error} />;
@@ -53,7 +57,7 @@ const Articles = () => {
   Articles
 </h1>
       <div className="topics-list">
-        <Topics />
+        <Topics setError={ setError} />
       </div>
 <div className="sort-controls flex items-center space-x-4 p-4 bg-base-200 rounded-lg shadow">
   <label htmlFor="sort-select" className="font-bold text-sm text-base-content">Sort by:</label>
