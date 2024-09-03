@@ -8,11 +8,6 @@ function Error({ error }) {
         <span className="text-xl font-semibold">Error:</span>
         <p className="mt-2 text-lg">{error.message}</p>
       </div>
-      <img
-        src="https://static-00.iconduck.com/assets.00/error-icon-512x512-mmajyv8q.png"
-        alt="Error illustration"
-        className="w-40 h-40 rounded-full object-cover"
-      />
     </div>
   );
 }
