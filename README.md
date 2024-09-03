@@ -12,7 +12,7 @@ Please note that the site is hosted for free, so it might take a moment to load.
 
 ## 📜 Description
 
-Northcoders News is a full-stack application designed to mimic the functionality of Reddit, but with a unique twist. The front-end, built with **React**, interacts with a custom-built API. You can check out the back-end on GitHub, which includes full setup instructions if you want to run it locally.
+Northcoders News is a full-stack application designed to mimic the functionality of Reddit, but with a unique twist. The front-end, built with **React**, interacts with a custom-built API. You can check out the back-end on [GitHub](https://github.com/Sultan0013/NC-News-BE), which includes full setup instructions if you want to run it locally.
 
 ## 🛠️ Getting Started
 
