@@ -42,7 +42,7 @@ const Login = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="card w-96 bg-black bg-opacity-90 shadow-xl p-6">
+      <div className="card w-96 bg-white bg-opacity-90 shadow-xl p-6">
         <div className="card-body">
           <h2 className="card-title text-center text-2xl font-bold">Login</h2>
           <div className="form-control">

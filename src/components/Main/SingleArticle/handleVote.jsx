@@ -1,4 +1,3 @@
-// handleVote.js
 import { updateVotes } from "../../../api/api";
 const handleVote = (
   voteChange,
@@ -20,7 +19,7 @@ const handleVote = (
 
   const votesInfo = { inc_votes: voteChange };
   updateVotes(article_id, votesInfo)
-    .then(setVotes)
+    .then(setVotes(newVotes))
     .catch((err) => {
       setVotes(votes);
       setVoteError(err);

@@ -20,7 +20,7 @@ function SingleArticle() {
   const [hasAgreed, setHasAgreed] = useState(false);
   const [hasDisagreed, setHasDisagreed] = useState(false);
   const [comments, setComments] = useState([]);
-  console.log(loggedUser);
+
   useEffect(() => {
     fetchArticle(article_id)
       .then((article) => {
@@ -30,6 +30,7 @@ function SingleArticle() {
       .catch(setError);
   }, [article_id, loggedUser]);
 
+  console.log(votes);
   if (error) return <Error error={error} />;
   if (!article) return <Loading />;
 
@@ -86,7 +87,7 @@ function SingleArticle() {
                 )
               }
               className="btn btn-success btn-sm"
-              disabled={hasAgreed || loggedUser ? false : true}
+              disabled={hasAgreed ? true : false}
             >
               Agree
             </button>
@@ -103,7 +104,7 @@ function SingleArticle() {
                 )
               }
               className="btn btn-error btn-sm"
-              disabled={hasDisagreed || loggedUser ? false : true}
+              disabled={hasDisagreed ? true : false}
             >
               Disagree
             </button>

@@ -11,6 +11,7 @@ import NotFound from "./components/UI/NotFound";
 import Login from "./components/Main/Users/login";
 import { UserProvider } from "../Context/userContext";
 import SignUp from "./components/Main/Users/singup";
+import UserProfile from "./components/User Profile/UserProfile";
 function App() {
   return (
     <UserProvider>
@@ -19,7 +20,7 @@ function App() {
           <NavBar />
         </header>
 
-        <main className="flex-grow container mx-auto bg-black-100 p-4">
+        <main className="">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<Articles />} />
@@ -32,6 +33,7 @@ function App() {
             <Route path="/users" element={<Users />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/userProfile" element={<UserProfile />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

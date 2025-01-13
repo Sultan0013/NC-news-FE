@@ -4,6 +4,8 @@ function Home() {
   return (
     <div
       className="hero min-h-screen"
+      
+
       style={{
         backgroundImage:
           "url(https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?cs=srgb&dl=pexels-stywo-1261728.jpg&fm=jpg)",

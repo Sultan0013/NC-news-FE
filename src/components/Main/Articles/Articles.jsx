@@ -54,10 +54,9 @@ const Articles = () => {
       <h1 className="text-4xl font-bold text-center text-black mb-6 decoration-primary">
         Articles
       </h1>
-      <div className="topics-list">
+      <div className="topics-list"></div>
+      <div className="sort-controls flex items-center space-x-4 p-4  rounded-lg shadow">
         <Topics setError={setError} />
-      </div>
-      <div className="sort-controls flex items-center space-x-4 p-4 bg-base-200 rounded-lg shadow">
         <label
           htmlFor="sort-select"
           className="font-bold text-sm text-base-content"
