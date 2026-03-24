@@ -29,7 +29,6 @@ const Articles = () => {
     fetchArticles(sort_by, order)
       .then(setArticles)
       .catch((err) => {
-        console.log(err);
         setError(err);
       });
   }, [searchParams]);

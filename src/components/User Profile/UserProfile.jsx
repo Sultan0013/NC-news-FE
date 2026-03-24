@@ -1,8 +1,19 @@
 import { UserContext } from "../../../Context/userContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function UserProfile() {
   const { loggedUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loggedUser) {
+      navigate("/login");
+    }
+  }, [loggedUser, navigate]);
+
+  if (!loggedUser) return null;
 
   return (
     <div className="hero bg-gradient-to-r from-blue-500 to-indigo-600 min-h-screen flex items-center justify-center">

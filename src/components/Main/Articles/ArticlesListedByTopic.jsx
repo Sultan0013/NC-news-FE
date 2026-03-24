@@ -30,10 +30,8 @@ function ListArticlesByTopic() {
     fetchArticles(sort_by, order, topic)
       .then((articles) => {
         setArticles(articles);
-        console.log(articles);
       })
       .catch((err) => {
-        console.log(err);
         setError(err);
       });
   }, [topic, searchParams]);
@@ -55,9 +53,9 @@ function ListArticlesByTopic() {
 
   return (
     <div className="articles-container">
-     <h1 class="text-3xl font-bold text-center mt-10">
-  {topic.charAt(0).toUpperCase() + topic.slice(1)} Articles
-</h1>
+      <h1 className="text-3xl font-bold text-center mt-10">
+        {topic.charAt(0).toUpperCase() + topic.slice(1)} Articles
+      </h1>
 
       <div className="topics-list">
         <Topics setError={setError} />

@@ -1,7 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./singelArticle.css";
+import "./singleArticle.css";
 import Loading from "../../UI/Loading";
 import Error from "../../UI/error";
 import ArticleComments from "./articlesComments";
@@ -30,7 +29,6 @@ function SingleArticle() {
       .catch(setError);
   }, [article_id, loggedUser]);
 
-  console.log(votes);
   if (error) return <Error error={error} />;
   if (!article) return <Loading />;
 
@@ -49,7 +47,7 @@ function SingleArticle() {
           <img
             src={article.article_img_url}
             alt={article.title}
-            className="w-full rounded-lg mb-6 object-cover h-full®"
+            className="w-full rounded-lg mb-6 object-cover h-full"
           />
         )}
         <p className="text-lg text-gray-800 leading-relaxed mb-4">

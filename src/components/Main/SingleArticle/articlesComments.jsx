@@ -1,37 +1,42 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../../UI/Loading";
 import Error from "../../UI/error";
-import "./singelArticle.css";
+import "./singleArticle.css";
 
 import { fetchComments, deleteComment } from "../../../api/api";
+
 function ArticleComments({ article_id, comments, setComments, username }) {
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [deletedCommentId, setDeletedCommentId] = useState(null);
 
   useEffect(() => {
-    fetchComments(article_id).then(setComments).catch(setError);
-  }, [article_id, setComments]);
-
-  const handleDelete = (comment_id) => {
-    deleteComment(comment_id)
-      .then(() => {
-        setTimeout(
-          () =>
-            setComments(
-              comments.filter((comment) => comment.comment_id !== comment_id)
-            ),
-          1000
-        );
-        setDeletedCommentId(comment_id);
+    setIsLoading(true);
+    fetchComments(article_id)
+      .then((data) => {
+        setComments(data);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError(err);
+        setIsLoading(false);
       });
+  }, [article_id, setComments]);
+
+  const handleDelete = (comment_id) => {
+    const previous = comments;
+    setComments(comments.filter((comment) => comment.comment_id !== comment_id));
+    setDeletedCommentId(comment_id);
+
+    deleteComment(comment_id).catch((err) => {
+      setComments(previous);
+      setDeletedCommentId(null);
+      setError(err);
+    });
   };
 
   if (error) return <Error error={error} />;
-  if (comments.length === 0) return <Loading />;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="article-comments space-y-4">
@@ -69,4 +74,5 @@ function ArticleComments({ article_id, comments, setComments, username }) {
     </div>
   );
 }
+
 export default ArticleComments;

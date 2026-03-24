@@ -1,7 +1,7 @@
-// src/api/api.jsx
 import axios from "axios";
 
-const API_BASE_URL = "https://nc-news-vvdv.onrender.com/api";
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "https://nc-news-vvdv.onrender.com/api";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,18 +10,17 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(error);
     if (error.response) {
       if (error.response.status === 404) {
         return Promise.reject({
           status: 404,
           message:
-            "404 : Sorry, we couldn't find the recourse you were looking for. It might have been moved, deleted, or never existed. Please check the URL or visit our homepage to find what you need. If you think this is a mistake, contact support for assistance.",
+            "404 : Sorry, we couldn't find the resource you were looking for. It might have been moved, deleted, or never existed. Please check the URL or visit our homepage to find what you need. If you think this is a mistake, contact support for assistance.",
         });
       }
       if (error.response.status === 400) {
         return Promise.reject({
-          status: 404,
+          status: 400,
           message:
             "400 : Sorry, there was a problem with your request. Please check the details and try again. If you need assistance, contact support.",
         });
@@ -75,14 +74,14 @@ const fetchComments = (article_id) => {
     .then((response) => response.data.comments);
 };
 
-const AddComment = (article_id, newComment) => {
+const addComment = (article_id, newComment) => {
   return api
     .post(`/articles/${article_id}/comments`, newComment)
     .then((response) => response.data.Comment);
 };
 
 const deleteComment = (comment_id) => {
-  return api.delete(`/comments/${comment_id}`).then((response) => true);
+  return api.delete(`/comments/${comment_id}`).then(() => true);
 };
 
 const checkUser = (username) => {
@@ -93,14 +92,14 @@ const checkUser = (username) => {
 
 const createUser = (user) => {
   return api.post("/users/signup", user).then((response) => {
-    response.data;
+    return response.data;
   });
 };
 
 export {
   fetchArticles,
   fetchTopics,
-  AddComment,
+  addComment,
   fetchArticle,
   fetchComments,
   deleteComment,

@@ -1,23 +1,25 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [loggedUser, setLoggedUser] = useState(null);
+  const [loggedUser, setLoggedUserState] = useState(() => {
+    const stored = localStorage.getItem("loggedUser");
+    return stored ? JSON.parse(stored) : null;
+  });
 
-  useEffect(() => {
-    if (!loggedUser) {
-      setLoggedUser({
-        username: "guest",
-        name: "Guest User",
-        avatarUrl:
-          "https://www.shutterstock.com/image-vector/avatar-guest-icon-260nw-1351831589.jpg", // Valid avatar URL
-      });
+  const setLoggedUser = (user) => {
+    setLoggedUserState(user);
+    if (user) {
+      localStorage.setItem("loggedUser", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("loggedUser");
     }
-  }, [loggedUser]);
+  };
 
   const logout = () => {
-    setLoggedUser(null);
+    setLoggedUserState(null);
+    localStorage.removeItem("loggedUser");
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddComment } from "../../../api/api";
+import { addComment } from "../../../api/api";
 
 function PostComment({ article_id, comments, setComments, username }) {
   const [comment, setComment] = useState("");
@@ -21,7 +21,7 @@ function PostComment({ article_id, comments, setComments, username }) {
       body: comment,
     };
 
-    AddComment(article_id, newComment)
+    addComment(article_id, newComment)
       .then((newComment) => {
         setComment("");
         setSuccessMessage("Comment posted successfully!");
